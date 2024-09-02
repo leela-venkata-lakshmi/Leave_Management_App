@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/styles1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#071952" >
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-white" href="dashboard.html" >Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="leaveApplication.html" >Leave Application</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="myLeaves.html" >My Leaves</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="leaveApproval.html" >Leave Approval</a>
+            </li>
+        </ul>
+        <div class="ml-auto">
+            <img src="images/profile.png" alt="Profile Icon" class="profile-icon" data-toggle="modal" data-target="#profileModal" onclick="toggleDropdown()">
+        </div>
+    </div>
+</nav>
+
+<!-- Profile Modal -->
+<div class="modal fade right" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="profileModalLabel">Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="employeeId">Employee ID: </p>
+                <p><span id="employeeFirstName"></span><span id="employeeLastName">&nbsp;</span></p>
+                <p id="dob">  </p>
+                <p id="empGender"></p>
+                <p id="employeeContact"></p>
+            </div>
+            <div class="modal-footer">
+                <a href="http://localhost:8080/Leave_Mgmt/logout" class="btn btn-danger">Logout</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <h2 class="text-success">Leave Summary</h2>
+    <div class="card-container">
+        <div class="card">
+            <h3>Sick Leave</h3>
+            <div class="leave-details">
+                <p>Allocated: <span id="sick-allocated">5</span> days</p>
+                <p>Utilized: <span id="sick-utilized">0</span> days</p>
+                <p>Available: <span id="sick-available">5</span> days</p>
+            </div>
+        </div>
+        <div class="card">
+            <h3>PTO (Paid Time Off)</h3>
+            <div class="leave-details">
+                <p>Allocated: <span id="pto-allocated">20</span> days</p>
+                <p>Utilized: <span id="pto-utilized">0</span> days</p>
+                <p>Available: <span id="pto-available">20</span> days</p>
+            </div>
+        </div>
+        <div class="card" id="maternity">
+            <h3>Maternity Leave</h3>
+            <div class="leave-details" >
+                <p>Allocated: <span id="maternity-allocated">50</span> days</p>
+                <p>Utilized: <span id="maternity-utilized">0</span> days</p>
+                <p>Available: <span id="maternity-available">50</span> days</p>
+            </div>
+        </div>
+        <div class="card" id="paternity">
+            <h3>Paternity Leave</h3>
+            <div class="leave-details" >
+                <p>Allocated: <span id="paternity-allocated">10</span> days</p>
+                <p>Utilized: <span id="paternity-utilized">0</span> days</p>
+                <p>Available: <span id="paternity-available">10</span> days</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="upcoming-holidays">
+        <h5>Upcoming Holidays</h5>
+        <ul>
+            <li>Onam - September 5</li>
+            <li>Saṃvatsarī/ Ganesh Chaturthi - September 7</li>
+            <li>Milad un-Nabi/Id-e-Milad - September 16</li>
+            <li>Mahatma Gandhi Jayanti - October 2</li>
+        </ul>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+fetchAndUseGender();
+});
+
+    function fetchAndUseGender() {
+        fetch('/Leave_Mgmt/getEmployeeGender') // Endpoint to get gender
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json(); // Parse response as JSON
+            })
+            .then(data => {
+                const gender = data.gender; // Gender value received from server
+                  console.log("sdfffdff");
+                // Example usage of gender data
+                if (gender === 'Male') {
+                    console.log('User is Male');
+                    // Hide or show elements based on gender
+                    document.getElementById('maternity').style.display = 'none';
+                } else if (gender === 'Female') {
+                    console.log('User is Female');
+                    // Hide or show elements based on gender
+                    document.getElementById('paternity').style.display = 'none';
+                }
+            })
+            .catch(error => console.error('Error fetching gender:', error));
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        fetch('/Leave_Mgmt/leaveSummary')
+            .then(response => response.json())
+            .then(data => {
+
+                document.getElementById('sick-allocated').textContent = data.sickAllocated;
+                document.getElementById('sick-utilized').textContent = data.sickUtilized;
+                document.getElementById('sick-available').textContent = data.sickAvailable;
+
+                document.getElementById('pto-allocated').textContent = data.ptoAllocated;
+                document.getElementById('pto-utilized').textContent = data.ptoUtilized;
+                document.getElementById('pto-available').textContent = data.ptoAvailable;
+
+                document.getElementById('maternity-allocated').textContent = data.maternityAllocated;
+                document.getElementById('maternity-utilized').textContent = data.maternityUtilized;
+                document.getElementById('maternity-available').textContent = data.maternityAvailable;
+
+                document.getElementById('paternity-allocated').textContent = data.paternityAllocated;
+                document.getElementById('paternity-utilized').textContent = data.paternityUtilized;
+                document.getElementById('paternity-available').textContent = data.paternityAvailable;
+            })
+            .catch(error => console.error('Error fetching leave summary:', error));
+    });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="scripts/script.js"></script>
+</body>
+</html>
+
