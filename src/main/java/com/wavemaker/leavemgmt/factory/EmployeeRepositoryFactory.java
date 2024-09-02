@@ -12,7 +12,10 @@ public class EmployeeRepositoryFactory {
         {
             synchronized (EmployeeRepositoryFactory.class)
             {
-                employeeRepository=new EmployeeRepositoryImpl();
+                 if(employeeRepository==null)
+                 {
+                      employeeRepository=new EmployeeRepositoryImpl();
+                 }
             }
         }
         return employeeRepository;
