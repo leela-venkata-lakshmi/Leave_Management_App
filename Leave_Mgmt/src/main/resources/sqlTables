@@ -1,0 +1,28 @@
+Table: employee
+Columns:
+EMP_ID int AI PK
+FIRST_NAME varchar(30)
+LAST_NAME varchar(30)
+MANAGER_ID int
+DOB date
+PHONE_NUM varchar(10)
+role varchar(50)
+gender enum('Male','Female')
+
+Table: leave_request
+Columns:
+REQ_ID int AI PK
+EMP_ID int
+FROM_DATE date
+TO_DATE date
+REASON varchar(255)
+LEAVE_STATUS enum('PENDING','APPROVED','REJECTED')
+LEAVE_TYPE enum('SICK','PTO','MATERNITY','PATERNITY')
+CREATED_AT timestamp
+
+Table: login
+Columns:
+EMAIL varchar(50) PK
+PASSWORD varchar(255)
+EMP_ID int
+
