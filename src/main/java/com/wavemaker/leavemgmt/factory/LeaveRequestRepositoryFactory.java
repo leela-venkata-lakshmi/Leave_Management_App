@@ -12,7 +12,10 @@ public class LeaveRequestRepositoryFactory {
         {
             synchronized (LeaveRequestRepositoryFactory.class)
             {
-                leaveRequestRepository=new LeaveRequestRepositoryImpl();
+                if(leaveRequestRepository==null)
+                {
+                    leaveRequestRepository=new LeaveRequestRepositoryImpl();
+                }
             }
         }
         return leaveRequestRepository;
