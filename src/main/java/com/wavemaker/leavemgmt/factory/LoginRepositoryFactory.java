@@ -12,7 +12,10 @@ public class LoginRepositoryFactory {
         {
             synchronized (LoginRepositoryFactory.class)
             {
-                loginRepository=new LoginRepositoryImpl();
+                 if(loginRepository==null)
+                  {
+                     loginRepository=new LoginRepositoryImpl();
+                  }
             }
         }
         return loginRepository;
