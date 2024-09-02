@@ -1,14 +1,15 @@
 # Leave_Management_App
 Added functionalities:
+
 Login: 
 <img width="935" alt="leave_mgmt1" src="https://github.com/user-attachments/assets/f82d0adf-4c61-465c-9f55-905133ab49a5">
+
 Login page created successfully by allowing only valid users into the dashboard by fecthing login credentials from the database.Used Bcrypt hashing for passwords.
 
-Dashboard & LeaveSummary & Upcoming Holidays:
+Dashboard:
+LeaveSummary & Upcoming Holidays:
 <img width="924" alt="leave_mgmt2" src="https://github.com/user-attachments/assets/559af3f6-9dc0-41b9-a86b-c4a3d4a19bca">
-Included Leave Summary,
-Upcoming Holidays ,
-Links to leave application, myleaves, leave approvals and profile icon in the dashboard.
+Included Leave Summary, Upcoming Holidays , Links to leave application, myleaves, leave approvals and profile icon in the dashboard.
 
 Profile icon & Logout: 
 onclick will fetch the employee details and will display. 
