@@ -37,5 +37,8 @@ If the employee is also a manager , then he can view all his employee leave requ
 Manager can also filter leave requests based on status.
 <img width="858" alt="leave_mgmt6" src="https://github.com/user-attachments/assets/8fa62539-b371-4b43-b8f9-51e10c80196b">
 
+Authontication Filter:
+Authontication added in a way that no user can access the application without login using webFilter. If user try to access any pages without login then it will redirect to the login page.
+
 Thank You.
 
