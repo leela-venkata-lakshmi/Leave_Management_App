@@ -95,11 +95,11 @@ public class LeaveRequestServlet extends HttpServlet {
                         resp.sendRedirect(req.getContextPath() + "/dashboard.html");
                     } else {
                         // Handle invalid leave request (e.g., exceeding available leave balance)
-                        resp.sendRedirect(req.getContextPath() + "/leaveRequestForm.html?error=Leave request exceeds available balance");
+                        resp.sendRedirect(req.getContextPath() + "/leaveApplication.html?error=Leave request exceeds available balance");
                     }
                 } catch (IllegalArgumentException e) {
                     logger.error("Invalid date format: fromDate={}, toDate={}", fromDate, toDate, e);
-                    resp.sendRedirect(req.getContextPath() + "/leaveRequestForm.html?error=Invalid date format");
+                    resp.sendRedirect(req.getContextPath() + "/leaveApplication.html?error=Invalid date format");
                 }
             }
         } catch (SQLException | NumberFormatException e) {
