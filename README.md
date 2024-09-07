@@ -1,6 +1,6 @@
 # Leave_Management_App
 
-# OVERVIEW:
+## OVERVIEW:
 
 This application is developed for employees to submit their leave requests and the managers of employees will approve or reject the employee leave applications.
 
